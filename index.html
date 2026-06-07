@@ -300,10 +300,23 @@ footer span{color:var(--primary)}
       </div>
     </div>
     <div class="form-group">
-      <label class="form-label">Image path</label>
-      <input class="form-input" id="fImg" type="text" placeholder="images/plates/dinner-plate.jpg">
-      <p class="img-hint">Upload the photo to your GitHub repo first, then type the relative path here.<br>e.g. <strong>images/glasses/wine-glass.jpg</strong></p>
-      <img id="imgPreview" class="form-img-preview" style="display:none" alt="Preview">
+      <label class="form-label">Photo</label>
+      <div id="uploadArea" style="border:2px dashed var(--cream-dark);border-radius:10px;padding:1.5rem;text-align:center;cursor:pointer;transition:border-color 0.2s;background:var(--cream)" onclick="document.getElementById('fImgFile').click()" ondragover="event.preventDefault();this.style.borderColor='var(--primary)'" ondragleave="this.style.borderColor='var(--cream-dark)'" ondrop="handleDrop(event)">
+        <div id="uploadPlaceholder">
+          <div style="font-size:32px;margin-bottom:8px">📸</div>
+          <p style="font-size:13px;color:var(--text-mid);margin-bottom:4px">Tap to upload a photo</p>
+          <p style="font-size:11px;color:var(--text-light)">or drag and drop here</p>
+        </div>
+        <img id="imgPreview" class="form-img-preview" style="display:none;margin:0 auto" alt="Preview">
+      </div>
+      <input type="file" id="fImgFile" accept="image/*" style="display:none" onchange="handleFileSelect(this.files[0])">
+      <div id="uploadProgress" style="display:none;margin-top:8px">
+        <div style="height:4px;background:var(--cream-dark);border-radius:2px;overflow:hidden">
+          <div id="uploadBar" style="height:100%;background:var(--primary);width:0%;transition:width 0.3s;border-radius:2px"></div>
+        </div>
+        <p style="font-size:11px;color:var(--text-mid);margin-top:4px;text-align:center" id="uploadStatusText">Uploading…</p>
+      </div>
+      <input type="hidden" id="fImg">
     </div>
     <div class="form-footer">
       <button class="btn-primary" id="saveBtn" onclick="saveItem()">Save item</button>
@@ -564,6 +577,9 @@ function openAdd() {
   ['fName','fDesc','fQty','fPrice','fImg'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('fCat').value = 'plates';
   document.getElementById('imgPreview').style.display = 'none';
+  document.getElementById('uploadPlaceholder').style.display = 'block';
+  document.getElementById('uploadProgress').style.display = 'none';
+  document.getElementById('fImgFile').value = '';
   document.getElementById('saveStatus').textContent = '';
   document.getElementById('itemFormOverlay').classList.add('open');
 }
@@ -580,11 +596,15 @@ function openEdit(firestoreId) {
   document.getElementById('fPrice').value = item.price || '';
   document.getElementById('fImg').value   = item.img || '';
   document.getElementById('saveStatus').textContent = '';
+  document.getElementById('uploadProgress').style.display = 'none';
+  document.getElementById('fImgFile').value = '';
   if (item.img) {
     document.getElementById('imgPreview').src = item.img;
     document.getElementById('imgPreview').style.display = 'block';
+    document.getElementById('uploadPlaceholder').style.display = 'none';
   } else {
     document.getElementById('imgPreview').style.display = 'none';
+    document.getElementById('uploadPlaceholder').style.display = 'block';
   }
   document.getElementById('itemFormOverlay').classList.add('open');
 }
@@ -639,13 +659,64 @@ function iconFor(cat) {
   return {plates:'🍽️',cutlery:'🍴',glasses:'🍷',serving:'🫙',linens:'🤍'}[cat] || '📦';
 }
 
-// Image preview on input
-document.getElementById('fImg').addEventListener('input', () => {
-  const val = document.getElementById('fImg').value.trim();
-  const p = document.getElementById('imgPreview');
-  if (val) { p.src = val; p.style.display = 'block'; }
-  else { p.style.display = 'none'; }
-});
+// ── Cloudinary Upload ─────────────────────────────────────────────────────────
+const CLOUDINARY_CLOUD = "dflbqacnt";
+const CLOUDINARY_PRESET = "lgm_uploads";
+
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('uploadArea').style.borderColor = 'var(--cream-dark)';
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) handleFileSelect(file);
+}
+
+function handleFileSelect(file) {
+  if (!file) return;
+  // Show local preview immediately
+  const reader = new FileReader();
+  reader.onload = e => {
+    const p = document.getElementById('imgPreview');
+    p.src = e.target.result;
+    p.style.display = 'block';
+    document.getElementById('uploadPlaceholder').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+  // Upload to Cloudinary
+  uploadToCloudinary(file);
+}
+
+async function uploadToCloudinary(file) {
+  const progress = document.getElementById('uploadProgress');
+  const bar = document.getElementById('uploadBar');
+  const statusText = document.getElementById('uploadStatusText');
+  progress.style.display = 'block';
+  bar.style.width = '20%';
+  statusText.textContent = 'Uploading…';
+
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', CLOUDINARY_PRESET);
+
+  try {
+    bar.style.width = '60%';
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
+      method: 'POST',
+      body: formData
+    });
+    const data = await res.json();
+    if (data.secure_url) {
+      document.getElementById('fImg').value = data.secure_url;
+      bar.style.width = '100%';
+      statusText.textContent = '✅ Photo uploaded!';
+      setTimeout(() => { progress.style.display = 'none'; }, 2000);
+    } else {
+      throw new Error(data.error?.message || 'Upload failed');
+    }
+  } catch(e) {
+    statusText.textContent = '❌ Upload failed: ' + e.message;
+    bar.style.background = 'var(--danger)';
+  }
+}
 
 document.getElementById('loginInput').addEventListener('keydown', e => {
   if (e.key === 'Enter') submitLogin();
@@ -655,7 +726,8 @@ document.getElementById('loginInput').addEventListener('keydown', e => {
 Object.assign(window, {
   filter, addToBasket, openBasket, changeQty, closeBasket,
   sendOrder, closeConfirm, toggleAdminLogin, submitLogin,
-  exitAdmin, openAdd, openEdit, closeItemForm, saveItem, deleteItem
+  exitAdmin, openAdd, openEdit, closeItemForm, saveItem, deleteItem,
+  handleDrop, handleFileSelect
 });
 </script>
 </body>
