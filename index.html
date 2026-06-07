@@ -12,7 +12,7 @@
   --primary:#c0603a;--primary-light:#d4784f;
   --dark:#1d3a3a;--dark-mid:#2a4f4f;
   --text:#2c3e35;--text-mid:#5a6e66;--text-light:#8a9e96;
-  --white:#ffffff;--burgundy:#6b2737;
+  --white:#ffffff;
   --shadow:0 2px 12px rgba(29,58,58,0.10);
   --shadow-hover:0 8px 28px rgba(29,58,58,0.18);
   --danger:#c0392b;
@@ -22,7 +22,6 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);min
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ── HERO ── */
 .hero{background:var(--dark);padding:3.5rem 1.25rem 3rem;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,96,58,0.13) 0%,transparent 70%);pointer-events:none}
 .hero-eyebrow{font-size:10px;letter-spacing:0.25em;color:var(--primary);text-transform:uppercase;margin-bottom:1rem}
@@ -35,7 +34,6 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);min
 .admin-toggle-btn{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,0.06);border:0.5px solid rgba(192,96,58,0.25);color:var(--text-light);font-size:11px;padding:6px 12px;border-radius:20px;cursor:pointer;font-family:'Jost',sans-serif;transition:all 0.2s;z-index:10}
 .admin-toggle-btn:hover{background:rgba(192,96,58,0.15);color:var(--primary-light)}
 
-/* ── NAV ── */
 .nav-wrap{background:var(--dark-mid);position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(192,96,58,0.15)}
 .nav{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 0.5rem}
 .nav::-webkit-scrollbar{display:none}
@@ -43,29 +41,26 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);min
 .nav-btn:hover{color:var(--cream)}
 .nav-btn.active{color:var(--primary-light);border-bottom-color:var(--primary)}
 
-/* ── MAIN ── */
 .main{max-width:1100px;margin:0 auto;padding:2rem 1rem 8rem}
 .section-header{display:flex;align-items:baseline;gap:0.75rem;margin-bottom:1.5rem}
 .section-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:var(--dark)}
 .section-count{font-size:12px;color:var(--text-light)}
-.empty-cat{grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-light);font-size:14px}
 .loading-wrap{text-align:center;padding:4rem 1rem;color:var(--text-light)}
 .spinner{width:32px;height:32px;border:2px solid var(--cream-dark);border-top-color:var(--primary);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 1rem}
+.empty-cat{grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-light);font-size:14px}
 
-/* ── GRID ── */
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 @media(min-width:540px){.grid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:800px){.grid{grid-template-columns:repeat(4,1fr);gap:16px}}
 @media(min-width:1060px){.grid{grid-template-columns:repeat(5,1fr)}}
 
-/* ── CARD ── */
 .card{background:var(--white);border-radius:14px;border:1px solid var(--cream-dark);overflow:hidden;transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;box-shadow:var(--shadow);animation:fadeUp 0.4s ease both}
 .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:var(--primary-light)}
 .card.out-of-stock{opacity:0.45}
-.card-img-wrap{position:relative;overflow:hidden;aspect-ratio:1/1;background:var(--cream-dark)}
+.card-img-wrap{position:relative;overflow:hidden;aspect-ratio:1/1;background:var(--cream)}
 .card-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.3s}
 .card:hover .card-img-wrap img{transform:scale(1.04)}
-.card-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;background:var(--cream);position:absolute;inset:0}
+.card-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px}
 .in-basket-dot{position:absolute;top:8px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 2px white;z-index:2}
 .card-body{padding:0.75rem 0.85rem 0.9rem}
 .card-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:500;color:var(--dark);margin-bottom:2px;line-height:1.2}
@@ -74,18 +69,16 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);min
 .card-footer{display:flex;align-items:center;justify-content:space-between}
 .qty-label{font-size:10px;text-transform:uppercase;letter-spacing:0.06em}
 .qty-label.ok{color:var(--text-light)}.qty-label.low{color:#b8660a}.qty-label.none{color:#a33}
-.add-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--cream-dark);background:var(--cream);color:var(--dark);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s,color 0.2s,border-color 0.2s}
+.add-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--cream-dark);background:var(--cream);color:var(--dark);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
 .add-btn:hover{background:var(--primary);border-color:var(--primary);color:var(--white)}
 .in-basket-label{margin-top:6px;font-size:10px;color:var(--primary)}
 
-/* ── BASKET BAR ── */
 .basket-bar{position:fixed;bottom:1.25rem;left:50%;transform:translateX(-50%) translateY(120px);background:var(--dark);color:var(--cream);border-radius:50px;padding:0.85rem 1.25rem 0.85rem 1.5rem;display:flex;align-items:center;gap:1.25rem;box-shadow:0 8px 40px rgba(29,58,58,0.35);border:1px solid rgba(192,96,58,0.2);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);z-index:40;width:calc(100% - 2rem);max-width:400px;justify-content:space-between}
 .basket-bar.visible{transform:translateX(-50%) translateY(0)}
 .basket-bar-info{font-size:13px}.basket-bar-info strong{color:var(--primary-light)}
 .basket-bar-btn{background:var(--primary);color:var(--white);border:none;border-radius:50px;padding:9px 20px;font-family:'Jost',sans-serif;font-size:12px;cursor:pointer;transition:background 0.2s}
 .basket-bar-btn:hover{background:var(--primary-light)}
 
-/* ── OVERLAYS & MODALS ── */
 .overlay{display:none;position:fixed;inset:0;background:rgba(29,58,58,0.65);z-index:60;align-items:flex-end;justify-content:center}
 .overlay.open{display:flex}
 @media(min-width:600px){.overlay{align-items:center}}
@@ -98,7 +91,6 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);min
 .modal-close{width:30px;height:30px;border-radius:50%;border:1px solid var(--cream-dark);background:var(--cream);color:var(--text-mid);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .modal-close:hover{background:var(--cream-dark)}
 
-/* ── BASKET ── */
 .basket-item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--cream-dark)}
 .basket-item-thumb{width:48px;height:48px;border-radius:8px;object-fit:cover;background:var(--cream-dark);flex-shrink:0}
 .basket-item-thumb-icon{width:48px;height:48px;border-radius:8px;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
@@ -123,25 +115,24 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);min
 .confirm-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--dark);margin-bottom:0.75rem}
 .confirm-text{font-size:13px;color:var(--text-mid);line-height:1.6}
 
-/* ── LOGIN ── */
 .login-modal{background:var(--white);border-radius:16px;padding:2rem;width:90%;max-width:360px}
-.login-modal h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--dark);margin-bottom:0.5rem}
+.login-modal h3{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--dark);margin-bottom:0.5rem}
 .login-modal p{font-size:13px;color:var(--text-light);margin-bottom:1.25rem}
 .login-input{width:100%;padding:12px;border:1px solid var(--cream-dark);border-radius:8px;font-family:'Jost',sans-serif;font-size:14px;outline:none;margin-bottom:0.75rem;transition:border-color 0.2s}
 .login-input:focus{border-color:var(--primary)}
 .login-error{font-size:12px;color:var(--danger);margin-bottom:0.75rem;min-height:16px}
 
-/* ── ADMIN PANEL ── */
 .admin-panel{position:fixed;inset:0;background:var(--cream);z-index:70;overflow-y:auto;display:none}
 .admin-panel.open{display:block}
 .admin-header{background:var(--dark);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:5}
 .admin-header h2{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);font-weight:400}
+.admin-header-btns{display:flex;gap:8px}
 .admin-exit-btn{background:transparent;border:0.5px solid rgba(192,96,58,0.4);color:var(--primary-light);font-size:12px;padding:7px 16px;border-radius:20px;cursor:pointer;font-family:'Jost',sans-serif}
 .admin-exit-btn:hover{background:rgba(192,96,58,0.1)}
 .admin-body{max-width:700px;margin:0 auto;padding:2rem 1rem}
 .admin-add-btn{width:100%;padding:14px;background:var(--primary);color:var(--white);border:none;border-radius:12px;font-family:'Jost',sans-serif;font-size:14px;letter-spacing:0.08em;cursor:pointer;margin-bottom:2rem}
 .admin-add-btn:hover{background:var(--primary-light)}
-.admin-section-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--dark);margin-bottom:1rem;font-weight:400}
+.admin-section-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--dark);margin-bottom:1rem}
 .admin-list-item{background:var(--white);border:1px solid var(--cream-dark);border-radius:12px;padding:12px;display:flex;align-items:center;gap:12px;margin-bottom:10px;box-shadow:var(--shadow)}
 .admin-list-thumb{width:52px;height:52px;border-radius:8px;overflow:hidden;background:var(--cream);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:24px}
 .admin-list-thumb img{width:100%;height:100%;object-fit:cover}
@@ -153,7 +144,6 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);min
 .admin-action-btn.edit:hover{border-color:var(--primary);color:var(--primary)}
 .admin-action-btn.del:hover{border-color:var(--danger);color:var(--danger);background:#fff5f5}
 
-/* ── ITEM FORM ── */
 .form-overlay{display:none;position:fixed;inset:0;background:rgba(29,58,58,0.65);z-index:80;align-items:flex-end;justify-content:center}
 .form-overlay.open{display:flex}
 @media(min-width:600px){.form-overlay{align-items:center}}
@@ -168,8 +158,9 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);min
 .form-img-preview{width:100%;height:160px;object-fit:cover;border-radius:8px;margin-top:8px;border:1px solid var(--cream-dark)}
 .img-hint{font-size:11px;color:var(--text-light);margin-top:6px;line-height:1.5}
 .form-footer{display:flex;gap:8px;margin-top:1.25rem}
-.form-footer .btn-primary{flex:2}
-.form-footer .btn-outline{flex:1}
+.form-footer .btn-primary{flex:2}.form-footer .btn-outline{flex:1}
+.save-status{font-size:12px;text-align:center;margin-top:8px;min-height:16px}
+.save-status.ok{color:green}.save-status.err{color:var(--danger)}
 
 footer{background:var(--dark);text-align:center;padding:1.75rem 1rem;font-size:11px;color:var(--text-light);letter-spacing:0.08em}
 footer span{color:var(--primary)}
@@ -177,7 +168,6 @@ footer span{color:var(--primary)}
 </head>
 <body>
 
-<!-- HERO -->
 <section class="hero">
   <button class="admin-toggle-btn" id="adminToggleBtn" onclick="toggleAdminLogin()">⚙️ Admin</button>
   <p class="hero-eyebrow">La Grande Maison</p>
@@ -192,14 +182,12 @@ footer span{color:var(--primary)}
   </div>
 </section>
 
-<!-- NAV -->
 <div class="nav-wrap">
   <nav class="nav" id="catNav">
     <button class="nav-btn active" onclick="filter('all',this)">All items</button>
   </nav>
 </div>
 
-<!-- CATALOGUE -->
 <main class="main">
   <div class="section-header">
     <h2 class="section-title" id="sectionTitle">Full Catalogue</h2>
@@ -210,13 +198,12 @@ footer span{color:var(--primary)}
   </div>
 </main>
 
-<!-- BASKET BAR -->
 <div class="basket-bar" id="basketBar">
   <div class="basket-bar-info"><strong id="barCount">0</strong> items selected</div>
   <button class="basket-bar-btn" onclick="openBasket()">View basket →</button>
 </div>
 
-<!-- BASKET MODAL -->
+<!-- BASKET -->
 <div class="overlay" id="basketOverlay">
   <div class="modal">
     <div class="modal-handle"></div>
@@ -232,14 +219,14 @@ footer span{color:var(--primary)}
   </div>
 </div>
 
-<!-- CONFIRM MODAL -->
+<!-- CONFIRM -->
 <div class="overlay" id="confirmOverlay">
   <div class="modal">
     <div class="modal-handle"></div>
     <div class="confirm-body">
       <div class="confirm-icon">✉️</div>
       <h3 class="confirm-title">Request sent!</h3>
-      <p class="confirm-text">Your order has been sent to La Grande Maison.<br>We'll get back to you shortly to confirm your booking.</p>
+      <p class="confirm-text">Your order has been sent to La Grande Maison.<br>We'll be in touch shortly to confirm your booking.</p>
     </div>
     <div class="modal-footer" style="margin-top:2rem">
       <button class="btn-primary" onclick="closeConfirm()">Back to catalogue</button>
@@ -247,7 +234,7 @@ footer span{color:var(--primary)}
   </div>
 </div>
 
-<!-- LOGIN MODAL -->
+<!-- LOGIN -->
 <div class="overlay" id="loginOverlay" style="align-items:center">
   <div class="login-modal">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem">
@@ -265,7 +252,9 @@ footer span{color:var(--primary)}
 <div class="admin-panel" id="adminPanel">
   <div class="admin-header">
     <h2>⚙️ Catalogue Manager</h2>
-    <button class="admin-exit-btn" onclick="exitAdmin()">✕ Exit</button>
+    <div class="admin-header-btns">
+      <button class="admin-exit-btn" onclick="exitAdmin()">✕ Exit</button>
+    </div>
   </div>
   <div class="admin-body">
     <button class="admin-add-btn" onclick="openAdd()">+ Add new item</button>
@@ -312,56 +301,45 @@ footer span{color:var(--primary)}
     </div>
     <div class="form-group">
       <label class="form-label">Image path</label>
-      <input class="form-input" id="fImg" type="text" placeholder="e.g. images/plates/dinner-plate.jpg">
-      <p class="img-hint">Upload the photo to your GitHub repo first, then paste the relative path here.<br>e.g. <strong>images/glasses/wine-glass.jpg</strong></p>
+      <input class="form-input" id="fImg" type="text" placeholder="images/plates/dinner-plate.jpg">
+      <p class="img-hint">Upload the photo to your GitHub repo first, then type the relative path here.<br>e.g. <strong>images/glasses/wine-glass.jpg</strong></p>
       <img id="imgPreview" class="form-img-preview" style="display:none" alt="Preview">
     </div>
     <div class="form-footer">
       <button class="btn-primary" id="saveBtn" onclick="saveItem()">Save item</button>
       <button class="btn-outline" onclick="closeItemForm()">Cancel</button>
     </div>
+    <p class="save-status" id="saveStatus"></p>
   </div>
 </div>
 
 <footer><p>© 2025 <span>La Grande Maison</span> — All enquiries by email</p></footer>
 
-<script>
-// ─────────────────────────────────────────────────────────────────────────────
-// 🔒 ADMIN PASSWORD
-// ─────────────────────────────────────────────────────────────────────────────
+<!-- Firebase -->
+<script type="module">
+import { initializeApp }                                          from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, updateDoc, deleteDoc,
+         doc, onSnapshot, query, orderBy }                        from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+// ── 🔧 YOUR FIREBASE CONFIG ───────────────────────────────────────────────────
+const firebaseConfig = {
+  apiKey:            "AIzaSyBuPTX7h8eQelR4UHa4AseRJ9YUQ-S8bbI",
+  authDomain:        "elegance-location-a7368.firebaseapp.com",
+  projectId:         "elegance-location-a7368",
+  storageBucket:     "elegance-location-a7368.firebasestorage.app",
+  messagingSenderId: "1054249088917",
+  appId:             "1:1054249088917:web:efe2359e8d13a6020a289c"
+};
+
+// ── 🔒 ADMIN PASSWORD ─────────────────────────────────────────────────────────
 const ADMIN_PASSWORD = "lgm2025";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// 📧 ORDER EMAIL
-// ─────────────────────────────────────────────────────────────────────────────
+// ── 📧 ORDER EMAIL ────────────────────────────────────────────────────────────
 const ORDER_EMAIL = "contact@lagrandemaison.sc";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// 📦 ITEMS — stored in localStorage so changes persist between sessions
-// Add your real items here as the default starting list
-// ─────────────────────────────────────────────────────────────────────────────
-const DEFAULT_ITEMS = [
-  {id:1,  name:"Dinner plate",    description:"White porcelain, 27cm",      category:"plates",  qty:80,  price:150, img:"images/plates/dinner-plate.jpg"},
-  {id:2,  name:"Side plate",      description:"White porcelain, 18cm",      category:"plates",  qty:80,  price:100, img:"images/plates/side-plate.jpg"},
-  {id:3,  name:"Soup bowl",       description:"Deep bowl, 22cm",            category:"plates",  qty:60,  price:120, img:"images/plates/soup-bowl.jpg"},
-  {id:4,  name:"Dessert plate",   description:"Fine porcelain, 20cm",       category:"plates",  qty:60,  price:100, img:"images/plates/dessert-plate.jpg"},
-  {id:5,  name:"Dinner knife",    description:"Stainless steel, set of 10", category:"cutlery", qty:100, price:250, img:"images/cutlery/dinner-knife.jpg"},
-  {id:6,  name:"Dinner fork",     description:"Stainless steel, set of 10", category:"cutlery", qty:100, price:250, img:"images/cutlery/dinner-fork.jpg"},
-  {id:7,  name:"Dessert spoon",   description:"Silver-finish, set of 10",   category:"cutlery", qty:100, price:200, img:"images/cutlery/dessert-spoon.jpg"},
-  {id:8,  name:"Salad fork",      description:"Stainless steel, set of 10", category:"cutlery", qty:80,  price:200, img:"images/cutlery/salad-fork.jpg"},
-  {id:9,  name:"Wine glass",      description:"Crystal, 35cl",              category:"glasses", qty:120, price:180, img:"images/glasses/wine-glass.jpg"},
-  {id:10, name:"Champagne flute", description:"Crystal, 18cl",              category:"glasses", qty:80,  price:180, img:"images/glasses/champagne-flute.jpg"},
-  {id:11, name:"Water glass",     description:"Clear glass, 30cl",          category:"glasses", qty:120, price:120, img:"images/glasses/water-glass.jpg"},
-  {id:12, name:"Cocktail glass",  description:"Martini style, 25cl",        category:"glasses", qty:40,  price:150, img:"images/glasses/cocktail-glass.jpg"},
-  {id:13, name:"Serving platter", description:"Large oval, 45cm",           category:"serving", qty:20,  price:350, img:"images/serving/serving-platter.jpg"},
-  {id:14, name:"Salad bowl",      description:"Ceramic, 30cm",              category:"serving", qty:15,  price:300, img:"images/serving/salad-bowl.jpg"},
-  {id:15, name:"Gravy boat",      description:"Porcelain with tray",        category:"serving", qty:12,  price:250, img:"images/serving/gravy-boat.jpg"},
-  {id:16, name:"Bread basket",    description:"Wicker, lined",              category:"serving", qty:0,   price:200, img:"images/serving/bread-basket.jpg"},
-  {id:17, name:"Tablecloth 6p",   description:"White linen, 140x240cm",     category:"linens",  qty:30,  price:400, img:"images/linens/tablecloth-6p.jpg"},
-  {id:18, name:"Tablecloth 10p",  description:"White linen, 160x320cm",     category:"linens",  qty:20,  price:550, img:"images/linens/tablecloth-10p.jpg"},
-  {id:19, name:"Cloth napkin",    description:"White, 45x45cm",             category:"linens",  qty:150, price:80,  img:"images/linens/cloth-napkin.jpg"},
-  {id:20, name:"Table runner",    description:"Ivory linen, 40x180cm",      category:"linens",  qty:25,  price:220, img:"images/linens/table-runner.jpg"},
-];
+// ── Init Firebase ─────────────────────────────────────────────────────────────
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
 
 // ── State ─────────────────────────────────────────────────────────────────────
 let allItems = [];
@@ -371,16 +349,33 @@ let isAdmin  = false;
 let editingId = null;
 const catLabels = {all:'Full Catalogue',plates:'Plates',cutlery:'Cutlery',glasses:'Glasses',serving:'Serving',linens:'Linens'};
 
-// ── Load items from localStorage (falls back to DEFAULT_ITEMS) ────────────────
-function loadItems() {
-  const saved = localStorage.getItem('lgm_items');
-  allItems = saved ? JSON.parse(saved) : DEFAULT_ITEMS;
-  buildNav(); renderGrid();
-}
+// ── Load items live from Firestore ────────────────────────────────────────────
+const q = query(collection(db, "items"), orderBy("name"));
 
-function saveItems() {
-  localStorage.setItem('lgm_items', JSON.stringify(allItems));
-}
+// Timeout fallback — if Firestore doesn't respond in 6s show empty state
+const fallbackTimer = setTimeout(() => {
+  if (!allItems.length) {
+    document.getElementById('catalogue').innerHTML =
+      `<div style="text-align:center;padding:3rem;color:var(--text-light);font-size:14px">
+        No items yet — check back soon!
+      </div>`;
+    document.getElementById('sectionCount').textContent = '0 items';
+  }
+}, 6000);
+
+onSnapshot(q, snap => {
+  clearTimeout(fallbackTimer);
+  allItems = snap.docs.map(d => ({ firestoreId: d.id, ...d.data() }));
+  buildNav(); renderGrid();
+  if (isAdmin) renderAdminList();
+}, err => {
+  clearTimeout(fallbackTimer);
+  console.error("Firestore error:", err);
+  document.getElementById('catalogue').innerHTML =
+    `<div style="text-align:center;padding:3rem;color:var(--text-light);font-size:14px">
+      Unable to load catalogue. Please try again later.
+    </div>`;
+});
 
 // ── Nav ───────────────────────────────────────────────────────────────────────
 function buildNav() {
@@ -406,10 +401,10 @@ function renderGrid() {
   document.getElementById('sectionCount').textContent = filtered.length + ' items';
 
   const html = filtered.map((item, idx) => {
-    const inB  = basket[item.id] || 0;
-    const qty  = parseInt(item.qty) || 0;
-    const oos  = qty === 0;
-    const low  = qty > 0 && qty <= 15;
+    const inB = basket[item.firestoreId] || 0;
+    const qty = parseInt(item.qty) || 0;
+    const oos = qty === 0;
+    const low = qty > 0 && qty <= 15;
     const qtyText  = oos ? 'Out of stock' : low ? `Only ${qty} left` : `${qty} available`;
     const qtyClass = oos ? 'none' : low ? 'low' : 'ok';
     return `<div class="card${oos?' out-of-stock':''}" style="animation-delay:${idx*25}ms">
@@ -426,7 +421,7 @@ function renderGrid() {
         ${item.price ? `<div class="card-price">SCR ${item.price}</div>` : ''}
         <div class="card-footer">
           <span class="qty-label ${qtyClass}">${qtyText}</span>
-          ${!oos ? `<button class="add-btn" onclick="addToBasket(${item.id})">+</button>` : ''}
+          ${!oos ? `<button class="add-btn" onclick="addToBasket('${item.firestoreId}')">+</button>` : ''}
         </div>
         ${inB > 0 ? `<div class="in-basket-label">✓ ${inB} in selection</div>` : ''}
       </div>
@@ -456,7 +451,7 @@ function openBasket() {
   } else {
     let total = 0;
     const rows = entries.map(([id,qty]) => {
-      const item = allItems.find(i=>i.id==id);
+      const item = allItems.find(i=>i.firestoreId===id);
       if (!item) return '';
       const line = (item.price||0) * qty;
       total += line;
@@ -470,9 +465,9 @@ function openBasket() {
           ${item.price ? `<div class="basket-item-price">SCR ${item.price} × ${qty} = SCR ${line}</div>` : ''}
         </div>
         <div class="qty-ctrl">
-          <button onclick="changeQty(${id},-1)">−</button>
+          <button onclick="changeQty('${id}',-1)">−</button>
           <span>${qty}</span>
-          <button onclick="changeQty(${id},1)">+</button>
+          <button onclick="changeQty('${id}',1)">+</button>
         </div>
       </div>`;
     }).join('');
@@ -494,7 +489,7 @@ function sendOrder() {
   if (!entries.length) return;
   let body = "Hello,\n\nI would like to place the following rental order:\n\n";
   entries.forEach(([id,qty]) => {
-    const item = allItems.find(i=>i.id==id);
+    const item = allItems.find(i=>i.firestoreId===id);
     if (item) body += `- ${item.name} × ${qty}${item.price ? ` (SCR ${item.price * qty})` : ''}\n`;
   });
   body += "\nPlease confirm availability and get back to me.\n\nThank you!";
@@ -520,7 +515,7 @@ function submitLogin() {
     document.getElementById('adminToggleBtn').textContent = '✕ Exit admin';
     updateBar(); renderAdminList();
   } else {
-    document.getElementById('loginError').textContent = 'Incorrect password. Try again.';
+    document.getElementById('loginError').textContent = 'Incorrect password.';
   }
 }
 
@@ -548,8 +543,8 @@ function renderAdminList() {
         <div class="admin-list-meta">${cap(item.category)} • Qty: ${item.qty} • SCR ${item.price||0}</div>
       </div>
       <div class="admin-list-actions">
-        <button onclick="openEdit(${item.id})" class="admin-action-btn edit">Edit</button>
-        <button onclick="deleteItem(${item.id})" class="admin-action-btn del">Delete</button>
+        <button onclick="openEdit('${item.firestoreId}')" class="admin-action-btn edit">Edit</button>
+        <button onclick="deleteItem('${item.firestoreId}')" class="admin-action-btn del">Delete</button>
       </div>
     </div>`).join('');
 }
@@ -557,20 +552,17 @@ function renderAdminList() {
 function openAdd() {
   editingId = null;
   document.getElementById('formTitle').textContent = 'Add new item';
-  document.getElementById('fName').value = '';
-  document.getElementById('fDesc').value = '';
+  ['fName','fDesc','fQty','fPrice','fImg'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('fCat').value = 'plates';
-  document.getElementById('fQty').value = '';
-  document.getElementById('fPrice').value = '';
-  document.getElementById('fImg').value = '';
   document.getElementById('imgPreview').style.display = 'none';
+  document.getElementById('saveStatus').textContent = '';
   document.getElementById('itemFormOverlay').classList.add('open');
 }
 
-function openEdit(id) {
-  const item = allItems.find(i=>i.id==id);
+function openEdit(firestoreId) {
+  const item = allItems.find(i=>i.firestoreId===firestoreId);
   if (!item) return;
-  editingId = id;
+  editingId = firestoreId;
   document.getElementById('formTitle').textContent = 'Edit item';
   document.getElementById('fName').value  = item.name || '';
   document.getElementById('fDesc').value  = item.description || '';
@@ -578,6 +570,7 @@ function openEdit(id) {
   document.getElementById('fQty').value   = item.qty || '';
   document.getElementById('fPrice').value = item.price || '';
   document.getElementById('fImg').value   = item.img || '';
+  document.getElementById('saveStatus').textContent = '';
   if (item.img) {
     document.getElementById('imgPreview').src = item.img;
     document.getElementById('imgPreview').style.display = 'block';
@@ -592,7 +585,7 @@ function closeItemForm() {
   editingId = null;
 }
 
-function saveItem() {
+async function saveItem() {
   const name  = document.getElementById('fName').value.trim();
   const desc  = document.getElementById('fDesc').value.trim();
   const cat   = document.getElementById('fCat').value;
@@ -602,38 +595,34 @@ function saveItem() {
 
   if (!name) { alert('Please enter an item name'); return; }
 
-  if (editingId !== null) {
-    const idx = allItems.findIndex(i=>i.id==editingId);
-    if (idx > -1) allItems[idx] = { id: editingId, name, description: desc, category: cat, qty, price, img };
-  } else {
-    const newId = allItems.length ? Math.max(...allItems.map(i=>i.id)) + 1 : 1;
-    allItems.push({ id: newId, name, description: desc, category: cat, qty, price, img });
-  }
+  const btn = document.getElementById('saveBtn');
+  const status = document.getElementById('saveStatus');
+  btn.textContent = 'Saving…'; btn.disabled = true;
+  status.textContent = ''; status.className = 'save-status';
 
-  saveItems();
-  closeItemForm();
-  buildNav();
-  renderGrid();
-  renderAdminList();
-}
+  const data = { name, description: desc, category: cat, qty, price, img };
 
-function deleteItem(id) {
-  if (!confirm('Delete this item?')) return;
-  allItems = allItems.filter(i=>i.id!=id);
-  saveItems(); buildNav(); renderGrid(); renderAdminList();
-}
-
-function previewImg() {
-  const val = document.getElementById('fImg').value.trim();
-  if (val) {
-    document.getElementById('imgPreview').src = val;
-    document.getElementById('imgPreview').style.display = 'block';
+  try {
+    if (editingId) {
+      await updateDoc(doc(db, "items", editingId), data);
+    } else {
+      await addDoc(collection(db, "items"), data);
+    }
+    closeItemForm();
+  } catch(e) {
+    status.textContent = 'Error saving: ' + e.message;
+    status.className = 'save-status err';
+  } finally {
+    btn.textContent = 'Save item'; btn.disabled = false;
   }
 }
 
-// Attach to img input
-document.getElementById('fImg').addEventListener('input', previewImg);
-document.getElementById('loginInput').addEventListener('keydown', e => { if(e.key==='Enter') submitLogin(); });
+async function deleteItem(firestoreId) {
+  if (!confirm('Delete this item? This cannot be undone.')) return;
+  try {
+    await deleteDoc(doc(db, "items", firestoreId));
+  } catch(e) { alert('Error: ' + e.message); }
+}
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function cap(s) { return s ? s.charAt(0).toUpperCase()+s.slice(1) : ''; }
@@ -641,8 +630,24 @@ function iconFor(cat) {
   return {plates:'🍽️',cutlery:'🍴',glasses:'🍷',serving:'🫙',linens:'🤍'}[cat] || '📦';
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────────
-loadItems();
+// Image preview on input
+document.getElementById('fImg').addEventListener('input', () => {
+  const val = document.getElementById('fImg').value.trim();
+  const p = document.getElementById('imgPreview');
+  if (val) { p.src = val; p.style.display = 'block'; }
+  else { p.style.display = 'none'; }
+});
+
+document.getElementById('loginInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') submitLogin();
+});
+
+// Expose to global for inline onclick
+Object.assign(window, {
+  filter, addToBasket, openBasket, changeQty, closeBasket,
+  sendOrder, closeConfirm, toggleAdminLogin, submitLogin,
+  exitAdmin, openAdd, openEdit, closeItemForm, saveItem, deleteItem
+});
 </script>
 </body>
 </html>
