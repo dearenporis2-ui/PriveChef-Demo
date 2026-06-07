@@ -421,7 +421,7 @@ function renderGrid() {
         ${item.price ? `<div class="card-price">SCR ${item.price}</div>` : ''}
         <div class="card-footer">
           <span class="qty-label ${qtyClass}">${qtyText}</span>
-          ${!oos ? `<button class="add-btn" onclick="addToBasket('${item.firestoreId}')">+</button>` : ''}
+          ${!oos ? `<button class="add-btn" onclick="addToBasket('${item.firestoreId}')" ${inB >= qty ? 'disabled style="opacity:0.35;cursor:not-allowed"' : ''}>+</button>` : ''}
         </div>
         ${inB > 0 ? `<div class="in-basket-label">✓ ${inB} in selection</div>` : ''}
       </div>
@@ -433,7 +433,14 @@ function renderGrid() {
 
 // ── Basket ────────────────────────────────────────────────────────────────────
 function addToBasket(id) {
-  basket[id] = (basket[id] || 0) + 1;
+  const item = allItems.find(i=>i.firestoreId===id);
+  if (!item) return;
+  const inBasket = basket[id] || 0;
+  if (inBasket >= parseInt(item.qty)) {
+    alert(`Sorry, only ${item.qty} available for ${item.name}.`);
+    return;
+  }
+  basket[id] = inBasket + 1;
   renderGrid(); updateBar();
 }
 
@@ -477,7 +484,9 @@ function openBasket() {
 }
 
 function changeQty(id, delta) {
-  basket[id] = Math.max(0, (basket[id]||0) + delta);
+  const item = allItems.find(i=>i.firestoreId===id);
+  const maxQty = item ? parseInt(item.qty) : 999;
+  basket[id] = Math.min(maxQty, Math.max(0, (basket[id]||0) + delta));
   if (!basket[id]) delete basket[id];
   updateBar(); openBasket();
 }
